@@ -1,7 +1,7 @@
 # Assignment 1 (Due Sept 12th)
 
 Note: I am on **Mac OS** so please adjust your commands accordingly.
-## Locate the .py file
+## Locate the .py file:
 
 Use your local terminal and locate .py directories.
 \
@@ -15,7 +15,7 @@ cd prog1
 
 ## Sample Commands:
 
-To create Erdős-Rényi graph in **.gml** file with 10 nodes and an edge probability of (1.1 ln 100) / 10:
+To create Erdős-Rényi graph in .gml file with 10 nodes and an edge probability of (1.1 ln 100) / 10:
 ```python
 python3 ./erdos_renyi_graph.py --create_random_graph --nodes 100 --constant 1.1 --output graph_file.gml
 ```
@@ -25,7 +25,7 @@ To read .gml file and make a BFS graph starting with 1:
 python3 ./erdos_renyi_graph.py --input graph_file.gml --BFS 1 --plot 
 ```
 
-## Command-Line Arguments
+## Command-Line Arguments:
 
 Here's the description of each command line arguments:
 
