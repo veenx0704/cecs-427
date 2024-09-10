@@ -1,6 +1,7 @@
 # Assignment 1 (Due Sept 12th)
 
-Note: I am on **Mac OS** so please adjust your commands accordingly.
+I am on **Mac OS** so please adjust your commands accordingly.
+
 ## Locate the .py file:
 
 Use your local terminal and locate .py directories.
@@ -37,3 +38,5 @@ Here's the description of each command line arguments:
 `--plot` to plot a graph\
 `--output` to set the name of the .gml file
 
+## Note:
+Please zoom in the graph, they may look overlapped but they are not:)
