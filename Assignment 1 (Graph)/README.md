@@ -15,7 +15,7 @@ cd prog1
 
 ## Sample Commands:
 
-To create Erdős-Rényi graph in .gml file with 10 nodes and an edge probability of (1.1 ln 100) / 10:
+To create Erdős-Rényi graph in .gml file with 10 nodes and an edge probability of (1.1 ln 100) / 100:
 ```python
 python3 ./erdos_renyi_graph.py --create_random_graph --nodes 100 --constant 1.1 --output graph_file.gml
 ```
