@@ -3,7 +3,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import argparse
 
-#make random graph based on equation and save it as gml
+# Layout settings
+DEFAULT_WIDTH = 1        # Default horizontal width of the layout
+DEFAULT_VERT_GAP = 1     # Default vertical gap between levels
+FIGURE_SIZE = (10, 8)       # Default figure size for plotting
+NODE_SIZE = 200            # Default node size
+FONT_SIZE = 7               # Default font size for node labels
+TITLE_COLOR = '#3b943a'     # Color for the plot title
+NODE_COLOR = '#c5f542'      # Node color
+EDGE_COLOR = '#000000'      # Edge color
+
+# Make random graph based on equation and save it as gml
 def create_random_graph_in_gml(n, c, my_gml):
     p = (c * np.log(n)) / n
     graph = nx.erdos_renyi_graph(n, p)
@@ -11,11 +21,12 @@ def create_random_graph_in_gml(n, c, my_gml):
         nx.write_gml(graph, my_gml)
     print(f"Random graph with {n} nodes created and saved to {my_gml}.")
 
-def hierarchy_pos(G, root=None, width=2., vert_gap=0.3, vert_loc=0, xcenter=0.5):
+# Function for hierarchical layout positioning
+def hierarchy_pos(G, root=None, width=DEFAULT_WIDTH, vert_gap=DEFAULT_VERT_GAP, vert_loc=0, xcenter=0.5):
     pos = _hierarchy_pos(G, root, width, vert_gap, vert_loc, xcenter)
     return pos
 
-def _hierarchy_pos(G, root, width=2., vert_gap=0.3, vert_loc=0, xcenter=0.5, pos=None, parent=None, parsed=[]):
+def _hierarchy_pos(G, root, width=DEFAULT_WIDTH, vert_gap=DEFAULT_VERT_GAP, vert_loc=0, xcenter=1, pos=None, parent=None):
     if pos is None:
         pos = {root: (xcenter, vert_loc)}
     else:
@@ -30,11 +41,11 @@ def _hierarchy_pos(G, root, width=2., vert_gap=0.3, vert_loc=0, xcenter=0.5, pos
         nextx = xcenter - width/2 - dx/2
         for child in children:
             nextx += dx
-            pos = _hierarchy_pos(G, child, width=dx, vert_gap=vert_gap, vert_loc=vert_loc-vert_gap, xcenter=nextx, pos=pos, parent=root, parsed=parsed)
+            pos = _hierarchy_pos(G, child, width=dx, vert_gap=vert_gap, vert_loc=vert_loc-vert_gap, xcenter=nextx, pos=pos, parent=root)
     
     return pos
 
-# read gml then make bfs then save it as a png
+# Read gml then make BFS then save it as a png
 def perform_bfs_with_hierarchy_layout(gml_filename, start_node):
     try:
         graph = nx.read_gml(gml_filename)
@@ -48,24 +59,21 @@ def perform_bfs_with_hierarchy_layout(gml_filename, start_node):
 
     bfs_tree = nx.bfs_tree(graph, source=start_node)
     num_nodes = len(bfs_tree.nodes)
-    vert_gap = max(0.3, 0.8 / (num_nodes ** 0.5))
-    width = max(2.0, num_nodes ** 0.5)
+    vert_gap = max(0.05, 0.5 / (num_nodes ** 0.5))
+    width = max(4, num_nodes ** 0.5)
 
     pos = hierarchy_pos(bfs_tree, root=start_node, vert_gap=vert_gap, width=width)
 
-    plt.figure(figsize=(19, 8))
-    plt.title('BFS Tree by Taiki Tsukahara', color='#3b943a')
+    plt.figure(figsize=FIGURE_SIZE)
+    plt.title('BFS Tree by Taiki Tsukahara', color=TITLE_COLOR)
     nx.draw(
-        bfs_tree, pos, with_labels=True, node_size=600, font_size=7, font_weight='bold',
-        node_color='#c5f542', edge_color='#000000', arrows=True, alpha=0.9
+        bfs_tree, pos, with_labels=True, node_size=NODE_SIZE, font_size=FONT_SIZE, font_weight='bold',
+        node_color=NODE_COLOR, edge_color=EDGE_COLOR, arrows=True, alpha=0.9
     )
-
-    plt.savefig('result.png', bbox_inches='tight')
     plt.show()
 
-# takes command argument to run the application
+# Takes command argument to run the application
 def main():
-    
     print("\nHello and welcome to BFS Maker....!\n")
 
     parser = argparse.ArgumentParser(description="For Assignment 1")
@@ -92,14 +100,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-"""
-
-Sample command (in MAC Terminal)
-
-To make a random graph in gml:
-python3 ./erdos_renyi_graph.py --create_random_graph --nodes 10 --constant 2 --output graph_file.gml
-
-To plot BFS with starting node:
-python3 ./erdos_renyi_graph.py --input graph_file.gml --BFS 1 --plot
-
-"""
