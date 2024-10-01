@@ -2,6 +2,8 @@
 
 I am on **Mac OS** so please adjust your commands accordingly.
 
+**Edit (10/01/2024):** This program is incomplete and does not work properly.
+
 ## Locate the .py file:
 
 Use your local terminal and locate .py directories.
