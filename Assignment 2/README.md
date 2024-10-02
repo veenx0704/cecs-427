@@ -33,22 +33,24 @@ python3 ./graph_analysis.py balanced_graph.gml --plot P --verify_balanced_graph
 ## 3. Command-Line Arguments:
 
 **`input_graph_file`**: (Required) Specifies the input graph file in GML format.
+\
+\
 **`--components`**: Defines the number of components to partition the graph.
-
-- **`--plot`**: Specifies the type of plot to generate:
+\
+**`--plot`**: Specifies the type of plot to generate:
   - `C`: Clustering plot
   - `N`: Neighborhood plot
   - `P`: Attribute-based plot
-
-- **`--verify_homophily`**: Verifies if the graph exhibits homophily (the tendency of nodes with similar attributes to connect).
-
-- **`--verify_balanced_graph`**: Checks if the graph is balanced based on edge signs.
-
-- **`--verify_balanced_by_attributes`**: Verifies if the graph is balanced considering both edge signs and node attributes.
-
-- **`--attribute`**: Specifies a node attribute (e.g., `color`) to check for balance when using the `--verify_balanced_by_attributes` option.
-
-- **`--output`**: Specifies the filename to save the output graph in GML format.
+\
+**`--verify_homophily`**: Verifies if the graph exhibits homophily (the tendency of nodes with similar attributes to connect).
+\
+**`--verify_balanced_graph`**: Checks if the graph is balanced based on edge signs.
+\
+**`--verify_balanced_by_attributes`**: Verifies if the graph is balanced considering both edge signs and node attributes.
+\
+**`--attribute`**: Specifies a node attribute (e.g., `color`) to check for balance when using the `--verify_balanced_by_attributes` option.
+\
+**`--output`**: Specifies the filename to save the output graph in GML format.
 
 ## Note:
 Please zoom in the graph, they may look overlapped but they are not:)
